@@ -1,18 +1,18 @@
 /**
  * Copyright (C) 2015 Łukasz Tomczak <lksztmczk@gmail.com>.
- *
+ * <p>
  * This file is part of OpenInTerminal plugin.
- *
+ * <p>
  * OpenInTerminal plugin is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * OpenInTerminal plugin is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU Lesser General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU Lesser General Public License
  * along with OpenInTerminal plugin. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,11 +54,11 @@ public abstract class OpenInTerminalAction extends AnAction {
         if (openInTerminalSettingsState != null) {
 
             String directoryPath = getPath(e, file, openInTerminalSettingsState);
+            String dirPatternToReplace = "{{OPENINTERMINAL_DIRECTORY}}";
 
             String openTerminalCmd = Joiner.on(" ").join(
                     openInTerminalSettingsState.getTerminalCommand(),
-                    openInTerminalSettingsState.getTerminalCommandOptions(),
-                    directoryPath);
+                    openInTerminalSettingsState.getTerminalCommandOptions().replace(dirPatternToReplace, directoryPath));
             try {
                 Runtime.getRuntime().exec(openTerminalCmd);
             } catch (IOException e1) {
